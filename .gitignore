@@ -6,3 +6,4 @@ build/
 .env
 .eslintcache
 src/secrets.js
+package-lock.json

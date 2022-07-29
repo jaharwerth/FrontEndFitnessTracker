@@ -1,0 +1,22 @@
+{
+  "name": "frontendfitnesstracker",
+  "version": "1.0.0",
+  "description": "Front End Fitness Tracker for Fullstack",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaharwerth/FrontEndFitnessTracker.git"
+  },
+  "author": "John-Anthony Harwerth and Jessica Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaharwerth/FrontEndFitnessTracker/issues"
+  },
+  "homepage": "https://github.com/jaharwerth/FrontEndFitnessTracker#readme",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
