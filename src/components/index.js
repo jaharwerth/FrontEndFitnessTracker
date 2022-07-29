@@ -1,1 +1,1 @@
-// export { default as Posts } from "./Posts"; this is just an example
+export { default as App } from "./App"; 
