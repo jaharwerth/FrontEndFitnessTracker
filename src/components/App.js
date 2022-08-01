@@ -1,10 +1,21 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+import {Home, Register, Login, Activities, Routines, My_Routines, Header} from "./";
 
 const App = () => {
 
     return (
-        // our routes go below here inside the div
-        <div>Hi Nick</div>
+        <div>
+            <Header />
+            <Routes>
+                <Home />
+                <Register />
+                <Login />
+                <Activities />
+                <Routines />
+                <My_Routines />
+            </Routes>
+        </div>
     )
 }
 
