@@ -15,7 +15,7 @@ const Login = ({ setLoggedIn }) => {
         localStorage.setItem("token", token);
         setUsername("");
         setPassword("");
-        navigate("/Home");
+        navigate("/");
         setLoggedIn(true);
         localStorage.setItem("loggedIn", true);
       } else {
