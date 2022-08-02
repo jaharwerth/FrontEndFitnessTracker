@@ -52,12 +52,38 @@ export async function getProfile(token) {
   return result;
 }
 
-
 export async function getRoutines() {
   const response = await fetch(`${BASEURL}/routines`, {
     headers: {
       "Content-Type": "application/json",
-    }
+    },
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function newRoutine(token, name, goal) {
+  const response = await fetch(`${BASEURL}/routines`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: name,
+      goal: goal,
+      isPublic: true,
+    }),
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function getActivities() {
+  const response = await fetch(`${BASEURL}/activities`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
   const result = await response.json();
   return result;
