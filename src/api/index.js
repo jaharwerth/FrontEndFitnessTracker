@@ -49,6 +49,16 @@ export async function getProfile(token) {
     },
   });
   const result = await response.json();
-  const profile = result;
-  return profile;
+  return result;
+}
+
+
+export async function getRoutines() {
+  const response = await fetch(`${BASEURL}/routines`, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  const result = await response.json();
+  return result;
 }
