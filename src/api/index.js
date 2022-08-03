@@ -101,7 +101,7 @@ export async function getUserRoutines(username, token){
 }
 
 export async function deleteRoutine(routineId, token){
-  const response = await fetch(`${BASEURL}routines/${routineId}`, {
+  const response = await fetch(`${BASEURL}/routines/${routineId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -109,4 +109,5 @@ export async function deleteRoutine(routineId, token){
     },
   });
   const result = await response.json();
+  return result;
 }

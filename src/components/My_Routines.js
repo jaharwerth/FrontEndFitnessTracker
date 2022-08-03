@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { newRoutine, getUserRoutines, deleteRoutine } from "../api";
+import { newRoutine, getUserRoutines } from "../api";
+import { DeleteRoutine } from "./"
 
 const My_Routines = () => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [userRoutines, setUserRoutines] = useState([])
-
+  const [routineId, setRoutineId] = useState(null);
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -18,21 +20,15 @@ const My_Routines = () => {
     fetchUserRoutines();
   }, []);
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     alert("Routine has been Added!");
-    const myRoutine = await newRoutine(token, name, goal);
+    const result = await newRoutine(token, name, goal);
+    console.log(result)
+    setRoutineId(result.id)
     navigate("/my_routines");
-    return myRoutine;
+    return result;
   };
-
-  const handleDelete = async(event) =>{
-    event.preventDefault()
-    const routineId = 
-    const deleteMyRoutine = await deleteRoutine(routineId, token)
-  }
 
   const nameChange = (event) => {
     setName(event.target.value);
@@ -96,7 +92,7 @@ const My_Routines = () => {
                       </div>
                     );
                   })}
-                  <button onClick={handleDelete}>Delete Routine</button>
+                  < DeleteRoutine routineId={routine.id} />
                 </>
               </div>
             );

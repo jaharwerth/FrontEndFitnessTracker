@@ -10,7 +10,7 @@ const Login = ({ setLoggedIn }) => {
     const handleSubmit = async (event) => {
       event.preventDefault();
       const result = await confirmLogin(username, password);
-      console.log(result)
+
       if (result && result.token) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("username", result.user.username)

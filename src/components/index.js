@@ -6,3 +6,4 @@ export { default as Activities } from "./Activities";
 export { default as Routines } from "./Routines";
 export { default as My_Routines } from "./My_Routines";
 export { default as Header } from "./Header";
+export { default as DeleteRoutine } from "./DeleteRoutine";
