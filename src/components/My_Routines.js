@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { newRoutine, getUserRoutines } from "../api";
 import { DeleteRoutine } from "./"
 
 const My_Routines = () => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
-  const [userRoutines, setUserRoutines] = useState([])
-  const [routineId, setRoutineId] = useState(null);
-  const navigate = useNavigate();
+  const [userRoutines, setUserRoutines] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function fetchUserRoutines() {
       const username = localStorage.getItem("username");
       const returnUserRoutines = await getUserRoutines(username, token);
-      setUserRoutines(returnUserRoutines);
+      setUserRoutines(returnUserRoutines.reverse());
     }
     fetchUserRoutines();
   }, []);
@@ -24,10 +21,9 @@ const My_Routines = () => {
     event.preventDefault();
     alert("Routine has been Added!");
     const result = await newRoutine(token, name, goal);
-    console.log(result)
-    setRoutineId(result.id)
-    navigate("/my_routines");
-    return result;
+    setUserRoutines([result, ...userRoutines])
+    setName("");
+    setGoal("");
   };
 
   const nameChange = (event) => {
@@ -48,6 +44,7 @@ const My_Routines = () => {
           placeholder="Name*"
           required={true}
           onChange={nameChange}
+          value={name}
         />
         <input
           type="text"
@@ -55,6 +52,7 @@ const My_Routines = () => {
           placeholder="Goal*"
           required={true}
           onChange={goalChange}
+          value={goal}
         />
         <button type="submit">CREATE</button>
       </form>
