@@ -30,6 +30,7 @@ const My_Routines = () => {
 
   const handleDelete = async(event) =>{
     event.preventDefault()
+    const routineId = 
     const deleteMyRoutine = await deleteRoutine(routineId, token)
   }
 
