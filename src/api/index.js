@@ -34,8 +34,7 @@ export async function confirmLogin(loginUsername, loginPassword) {
       }),
     });
     const result = await response.json();
-    const token = result.token;
-    return token;
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -87,4 +86,27 @@ export async function getActivities() {
   })
   const result = await response.json();
   return result;
+}
+
+export async function getUserRoutines(username, token){
+  const response = await fetch(`${BASEURL}/users/${username}/routines`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
+  return result;  
+}
+
+export async function deleteRoutine(routineId, token){
+  const response = await fetch(`${BASEURL}routines/${routineId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
 }
