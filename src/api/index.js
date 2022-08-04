@@ -44,7 +44,7 @@ export async function getProfile(token) {
   const response = await fetch(`${BASEURL}/users/me`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
   });
   const result = await response.json();
@@ -66,7 +66,7 @@ export async function newRoutine(token, name, goal) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
     body: JSON.stringify({
       name: name,
@@ -93,7 +93,7 @@ export async function getUserRoutines(username, token){
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
   });
   const result = await response.json();
@@ -105,8 +105,24 @@ export async function deleteRoutine(routineId, token){
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function editRoutine(routineId, token, name, goal){
+  const response = await fetch(`${BASEURL}/routines/${routineId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: name,
+      goal: goal,
+    })
   });
   const result = await response.json();
   return result;

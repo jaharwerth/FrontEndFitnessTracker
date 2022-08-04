@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { newRoutine, getUserRoutines } from "../api";
-import { DeleteRoutine } from "./"
+import { DeleteRoutine, EditRoutine } from "./";
 
 const My_Routines = () => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
+  const [error, setError] = useState(null);
   const [userRoutines, setUserRoutines] = useState([]);
   const token = localStorage.getItem("token");
 
@@ -12,18 +13,25 @@ const My_Routines = () => {
     async function fetchUserRoutines() {
       const username = localStorage.getItem("username");
       const returnUserRoutines = await getUserRoutines(username, token);
-      setUserRoutines(returnUserRoutines.reverse());
+      setUserRoutines(returnUserRoutines);
     }
     fetchUserRoutines();
-  }, []);
+  }, [userRoutines]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    alert("Routine has been Added!");
     const result = await newRoutine(token, name, goal);
-    setUserRoutines([result, ...userRoutines])
-    setName("");
-    setGoal("");
+
+    if (result.error) {
+      setError(result);
+      setName("");
+      setGoal("");
+    } else {
+      setUserRoutines([result, ...userRoutines]);
+      setName("");
+      setGoal("");
+      setError(null);
+    }
   };
 
   const nameChange = (event) => {
@@ -56,50 +64,53 @@ const My_Routines = () => {
         />
         <button type="submit">CREATE</button>
       </form>
-
+      {error && error.message ? `Routine name aleady exists!` : null}
       <h1> My Routines </h1>
       <div>
         {userRoutines.length
           ? userRoutines.map((routine, index) => {
-            return (
-              <div className="redBox" key={index}>
-                <>
-                  <h3>{routine.name}</h3>
-                  <div>
-                    <b>Goal: </b> {routine.goal}
-                  </div>
-                  <div>
-                    <b>User:</b> {routine.creatorName}
-                  </div>
-                  <div>Activities</div>
-                  {routine.activities.map((activity, index) => {
-                    return (
-                      <div className="greenBox" key={index}>
-                        <div>
-                          <b>Name</b> {activity.name}
-                        </div>
-                        <div>
-                          <b>Description</b> {activity.description}
-                        </div>
-                        <div>
-                          <b>Duration</b> {activity.duration}
-                        </div>
-                        <div>
-                          <b>Count</b> {activity.count}
-                        </div>
-                      </div>
-                    );
-                  })}
-                  < DeleteRoutine routineId={routine.id} />
-                </>
-              </div>
-            );
-          })
+              return (
+                <div className="redBox" key={index}>
+                  <>
+                    <h3>{routine.name}</h3>
+                    <div>
+                      <b>User:</b> {routine.creatorName}
+                    </div>
+                    <div>
+                      <b>Goal: </b> {routine.goal}
+                    </div>
+                    <EditRoutine routineId={routine.id} routine={routine} />
+                    <DeleteRoutine routineId={routine.id} />
+                    <div><b>Activities:</b></div>
+                    {routine.activities && routine.activities.length
+                      ? routine.activities.map((activity, index) => {
+                          return (
+                            <div className="greenBox" key={index}>
+                              <div>
+                                <b>Name</b> {activity.name}
+                              </div>
+                              <div>
+                                <b>Description</b> {activity.description}
+                              </div>
+                              <div>
+                                <b>Duration</b> {activity.duration}
+                              </div>
+                              <div>
+                                <b>Count</b> {activity.count}
+                              </div>
+                            </div>
+                          );
+                        })
+                      : null}
+                    
+                  </>
+                </div>
+              );
+            })
           : null}
       </div>
     </div>
-  )
-
+  );
 };
 
 export default My_Routines;
