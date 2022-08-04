@@ -16,7 +16,6 @@ const Routines = ({}) => {
     <div>
       <h1>Routines</h1>
       <div>
-        {" "}
         {allRoutines.length
           ? allRoutines.map((routine, index) => {
               return (
