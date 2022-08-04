@@ -59,6 +59,7 @@ const EditRoutine = ({ routineId, routine }) => {
         <button
           onClick={() => {
             setEditForm(false);
+            setError("")
           }}
         >
           Cancel Edit
