@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { newRoutine, getUserRoutines } from "../api";
-import { DeleteRoutine, EditRoutine } from "./";
+import { newRoutine, getUserRoutines, getActivities } from "../api";
+import { DeleteRoutine, EditRoutine, DropDown } from "./";
 
 const My_Routines = () => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [error, setError] = useState(null);
   const [userRoutines, setUserRoutines] = useState([]);
+  const [allActivities, setAllActivities] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -16,7 +17,13 @@ const My_Routines = () => {
       setUserRoutines(returnUserRoutines);
     }
     fetchUserRoutines();
-  }, [userRoutines]);
+
+    async function fetchActivities() {
+      const returnActivities = await getActivities();
+      setAllActivities(returnActivities.reverse());
+    }
+    fetchActivities();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -81,7 +88,7 @@ const My_Routines = () => {
                     </div>
                     <EditRoutine routineId={routine.id} routine={routine} />
                     <DeleteRoutine routineId={routine.id} />
-                    <div><b>Activities:</b></div>
+                    <DropDown routineId={routine.id} allActivities={allActivities} />
                     {routine.activities && routine.activities.length
                       ? routine.activities.map((activity, index) => {
                           return (
