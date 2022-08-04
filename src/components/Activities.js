@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { getActivities, newActivity } from "../api";
 
 const Activities = () => {
@@ -7,7 +6,6 @@ const Activities = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchActivities() {
