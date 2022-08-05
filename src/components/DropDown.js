@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { getActivities, attachActivity } from "../api";
 
-const DropDown = ({ routineId, allActivities, setAllActivities }) => {
-  const [selected, setSelected] = useState({});
+const DropDown = ({
+  routineId,
+  thisRoutine,
+  setThisRoutine,
+  allActivities,
+}) => {
+  const [selected, setSelected] = useState([]);
   const [error, setError] = useState(null);
+
+  useEffect(()=>{
+    if(allActivities) {
+      setSelected([allActivities[0].id, allActivities[0].name, allActivities[0].description])
+    }
+  }, [allActivities]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await attachActivity(routineId, selected);
+    const result = await attachActivity(routineId, selected[0]);
 
     if (result.error) {
       setError(result);
-      // alert("activity has already been added");
+      alert("activity already attached");
     } else {
-      setAllActivities([result, ...allActivities])
       setError(null);
+      result.name = selected[1]
+      result.description = selected[2]
+      setThisRoutine({...thisRoutine, activities: [...thisRoutine.activities, result]})
+      alert("activity has been added");
     }
   };
 
   const handleChange = (event) => {
-    setSelected(event.target.value);
+    setSelected(event.target.value.split(","));
   };
 
   return (
@@ -32,9 +46,9 @@ const DropDown = ({ routineId, allActivities, setAllActivities }) => {
           <option>Choose Activity to Attach</option>
           {allActivities.map((activity, index) => {
             return (
-                <option key={`activity${index}`} value={activity.id}>
-                  {activity.name}
-                </option>
+              <option key={`activity${index}`} value={`${activity.id},${activity.name},${activity.description}`}>
+                {activity.name}
+              </option>
             );
           })}
         </select>
@@ -45,4 +59,3 @@ const DropDown = ({ routineId, allActivities, setAllActivities }) => {
 };
 
 export default DropDown;
- 

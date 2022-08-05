@@ -27,6 +27,8 @@ const SingleRoutine = ({ routine, allActivities, setAllActivities }) => {
             />
             <DropDown
               routineId={thisRoutine.id}
+              thisRoutine={thisRoutine}
+              setThisRoutine={setThisRoutine}
               allActivities={allActivities}
               setAllActivities={setAllActivities}
             />
@@ -42,7 +44,7 @@ const SingleRoutine = ({ routine, allActivities, setAllActivities }) => {
               : null}
           </div>
         </div>
-      ) : null}{" "}
+      ) : null}
     </>
   );
 };

@@ -11,3 +11,5 @@ export { default as EditRoutine } from "./EditRoutine";
 export { default as DropDown } from "./DropDown";
 export { default as SingleRoutine } from "./SingleRoutine";
 export { default as SingleActivity } from "./SingleActivity";
+export { default as EditActivity } from "./EditActivity";
+export { default as RemoveActivity } from "./RemoveActivity";
