@@ -1,17 +1,21 @@
-import React, { useState } from "react";
-import { attachActivity } from "../api";
+import React, { useState, useEffect } from "react";
+import { getActivities, attachActivity } from "../api";
 
-const DropDown = ({ routineId, allActivities }) => {
+const DropDown = ({ routineId, allActivities, setAllActivities }) => {
   const [selected, setSelected] = useState({});
-  //I know these variable probably aren't defined correctly but I wanted to send in something so you could see the error
-  const activityId = allActivities.id;
-  const count = allActivities.count;
-  const duration = allActivities.duration;
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await attachActivity(routineId, activityId, count, duration);
-    return result;
+    const result = await attachActivity(routineId, selected);
+
+    if (result.error) {
+      setError(result);
+      // alert("activity has already been added");
+    } else {
+      setAllActivities([result, ...allActivities])
+      setError(null);
+    }
   };
 
   const handleChange = (event) => {
@@ -28,12 +32,9 @@ const DropDown = ({ routineId, allActivities }) => {
           <option>Choose Activity to Attach</option>
           {allActivities.map((activity, index) => {
             return (
-              <>
-                {/* Warning: Each child in a list should have a unique "key" prop. */}
-                <option key={index} value={activity.id}>
+                <option key={`activity${index}`} value={activity.id}>
                   {activity.name}
                 </option>
-              </>
             );
           })}
         </select>
@@ -44,3 +45,4 @@ const DropDown = ({ routineId, allActivities }) => {
 };
 
 export default DropDown;
+ 

@@ -144,9 +144,12 @@ export async function editRoutine(routineId, token, name, goal){
   return result;
 }
 
-export async function attachActivity(routineId, activityId, count, duration) {
+export async function attachActivity(routineId, activityId, count = 0, duration = 0) {
   const response = await fetch(`${BASEURL}/routines/${routineId}/activities`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       activityId: activityId,
       count: count, 

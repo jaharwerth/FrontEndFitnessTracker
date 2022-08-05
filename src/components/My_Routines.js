@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { newRoutine, getUserRoutines, getActivities } from "../api";
-import { DeleteRoutine, EditRoutine, DropDown } from "./";
+import { SingleRoutine } from "./";
 
 const My_Routines = () => {
   const [name, setName] = useState("");
@@ -77,44 +77,10 @@ const My_Routines = () => {
         {userRoutines.length
           ? userRoutines.map((routine, index) => {
               return (
-                <div className="redBox" key={index}>
-                  <>
-                    <h3>{routine.name}</h3>
-                    <div>
-                      <b>User:</b> {routine.creatorName}
-                    </div>
-                    <div>
-                      <b>Goal: </b> {routine.goal}
-                    </div>
-                    <EditRoutine routineId={routine.id} routine={routine} />
-                    <DeleteRoutine routineId={routine.id} />
-                    <DropDown routineId={routine.id} allActivities={allActivities} />
-                    {routine.activities && routine.activities.length
-                      ? routine.activities.map((activity, index) => {
-                          return (
-                            <div className="greenBox" key={index}>
-                              <div>
-                                <b>Name</b> {activity.name}
-                              </div>
-                              <div>
-                                <b>Description</b> {activity.description}
-                              </div>
-                              <div>
-                                <b>Duration</b> {activity.duration}
-                              </div>
-                              <div>
-                                <b>Count</b> {activity.count}
-                              </div>
-                            </div>
-                          );
-                        })
-                      : null}
-                    
-                  </>
-                </div>
+                <SingleRoutine key={`routine${index}`} routine={routine} allActivities={allActivities} setAllActivities={setAllActivities} />
               );
             })
-          : null}
+          : <div>Return your Routines</div>}
       </div>
     </div>
   );

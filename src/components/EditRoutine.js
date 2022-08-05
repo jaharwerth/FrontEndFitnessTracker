@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { editRoutine } from "../api";
 
-const EditRoutine = ({ routineId, routine }) => {
+const EditRoutine = ({ routineId, routine, setThisRoutine }) => {
   const [name, setName] = useState(routine.name);
   const [goal, setGoal] = useState(routine.goal);
   const [error, setError] = useState(null);
@@ -19,6 +19,11 @@ const EditRoutine = ({ routineId, routine }) => {
     } else {
       setEditForm(false);
       setError(null);
+      setThisRoutine({
+        ...routine,
+        name: updateMyRoutine.name,
+        goal: updateMyRoutine.goal,
+      });
       return updateMyRoutine;
     }
   };
@@ -48,7 +53,7 @@ const EditRoutine = ({ routineId, routine }) => {
           required={true}
           onChange={goalChange}
         />
-        <button type="submit">CREATE</button>
+        <button type="submit">UPDATE</button>
       </form>
     );
   };
@@ -59,7 +64,7 @@ const EditRoutine = ({ routineId, routine }) => {
         <button
           onClick={() => {
             setEditForm(false);
-            setError("")
+            setError("");
           }}
         >
           Cancel Edit
