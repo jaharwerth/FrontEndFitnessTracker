@@ -19,7 +19,7 @@ const Home = () => {
         <div>
           {localStorage.getItem("loggedIn") ? (
             <>
-              <h1>Welcome to Fitness Tracker</h1>
+              <h1>Welcome to Fitness Trac.kr</h1>
               {myInfo && myInfo.username ? (
                 <h3>{`Logged in as ${myInfo.username}`}</h3>
               ) : null}
