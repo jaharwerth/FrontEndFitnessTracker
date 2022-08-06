@@ -80,7 +80,7 @@ const My_Routines = () => {
                 <SingleRoutine key={`routine${index}`} routine={routine} allActivities={allActivities} setAllActivities={setAllActivities} />
               );
             })
-          : <div>Return your Routines</div>}
+          : null}
       </div>
     </div>
   );

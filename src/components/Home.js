@@ -33,7 +33,7 @@ const Home = () => {
             </>
           ) : (
             <>
-              <h1>Welcome to Fitness Tracker</h1>
+              <h1>Welcome to Fitness Trac.kr</h1>
               <button
                 onClick={() => {
                   navigate("/Login");
