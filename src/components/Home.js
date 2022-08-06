@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { getProfile } from "../api";
+import { Login } from "./"
 
 const Home = () => {
     const navigate = useNavigate();
@@ -34,13 +35,7 @@ const Home = () => {
           ) : (
             <>
               <h1>Welcome to Fitness Trac.kr</h1>
-              <button
-                onClick={() => {
-                  navigate("/Login");
-                }}
-              >
-                PLEASE LOGIN
-              </button>
+              <Login />              
             </>
           )}
         </div>

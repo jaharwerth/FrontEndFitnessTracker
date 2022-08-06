@@ -11,24 +11,45 @@ const Header = ({loggedIn, setLoggedIn}) => {
       };
 
     return (
-        <div>
-            <h1 onClick={() => { navigate("/"); }}>Fitness Trac.kr</h1>
+        <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" onClick={() => { navigate("/"); }}>Fitness Trac.kr</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
             {localStorage.getItem("loggedIn") ? (
-                <>
-                    <div onClick={() => { navigate("/routines"); }}>Routines</div>
-                    <div onClick={() => { navigate("/activities"); }}>Activities</div>
-                    <div onClick={() => { navigate("/my_routines"); }}>My Routines</div>
-                    <button className="navbutton" onClick={handleClickLogout}>Logout</button>
-                </>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a class="nav-link" href="routines">Routines</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="activities">Activities</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="my_routines">My Routines</a>
+                        </li>
+                    </ul>
+                        <button className="navbutton" onClick={handleClickLogout}>Logout</button>
+                </div>
             ) : (
-                <>
-                    <div onClick={() => { navigate("/routines"); }}>Routines</div>
-                    <div onClick={() => { navigate("/activities"); }}>Activities</div>
-                    <div onClick={() => { navigate("/login"); }}>Login</div>
-                </>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a class="nav-link" href="routines">Routines</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="activities">Activities</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="login">Login</a>
+                        </li>
+                    </ul>
+                </div>
             )}
 
         </div>
+        </nav>
     )
 };
 
