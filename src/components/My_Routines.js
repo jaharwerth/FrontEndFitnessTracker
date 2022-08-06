@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { newRoutine, getUserRoutines } from "../api";
-import { DeleteRoutine, EditRoutine } from "./";
+import { newRoutine, getUserRoutines, getActivities } from "../api";
+import { SingleRoutine } from "./";
 
 const My_Routines = () => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [error, setError] = useState(null);
   const [userRoutines, setUserRoutines] = useState([]);
+  const [allActivities, setAllActivities] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -16,7 +17,13 @@ const My_Routines = () => {
       setUserRoutines(returnUserRoutines);
     }
     fetchUserRoutines();
-  }, [userRoutines]);
+
+    async function fetchActivities() {
+      const returnActivities = await getActivities();
+      setAllActivities(returnActivities.reverse());
+    }
+    fetchActivities();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -70,41 +77,7 @@ const My_Routines = () => {
         {userRoutines.length
           ? userRoutines.map((routine, index) => {
               return (
-                <div className="redBox" key={index}>
-                  <>
-                    <h3>{routine.name}</h3>
-                    <div>
-                      <b>User:</b> {routine.creatorName}
-                    </div>
-                    <div>
-                      <b>Goal: </b> {routine.goal}
-                    </div>
-                    <EditRoutine routineId={routine.id} routine={routine} />
-                    <DeleteRoutine routineId={routine.id} />
-                    <div><b>Activities:</b></div>
-                    {routine.activities && routine.activities.length
-                      ? routine.activities.map((activity, index) => {
-                          return (
-                            <div className="greenBox" key={index}>
-                              <div>
-                                <b>Name</b> {activity.name}
-                              </div>
-                              <div>
-                                <b>Description</b> {activity.description}
-                              </div>
-                              <div>
-                                <b>Duration</b> {activity.duration}
-                              </div>
-                              <div>
-                                <b>Count</b> {activity.count}
-                              </div>
-                            </div>
-                          );
-                        })
-                      : null}
-                    
-                  </>
-                </div>
+                <SingleRoutine key={`routine${index}`} routine={routine} allActivities={allActivities} setAllActivities={setAllActivities} />
               );
             })
           : null}

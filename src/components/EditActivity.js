@@ -1,57 +1,63 @@
 import React, { useState } from "react";
-import { editRoutine } from "../api";
+import { editActivity } from "../api";
 
-const EditRoutine = ({ routineId, routine, setThisRoutine }) => {
-  const [name, setName] = useState(routine.name);
-  const [goal, setGoal] = useState(routine.goal);
+const EditActivity = ({ thisActivity, setThisActivity }) => {
+  const { routineActivityId } = thisActivity;
+  const [count, setCount] = useState(thisActivity.count);
+  const [duration, setDuration] = useState(thisActivity.duration);
   const [error, setError] = useState(null);
   const [editForm, setEditForm] = useState(false);
 
   const handleEdit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
-    const updateMyRoutine = await editRoutine(routineId, token, name, goal);
+    const result = await editActivity(
+      routineActivityId,
+      token,
+      duration,
+      count
+    );
 
-    if (updateMyRoutine.error) {
-      setError(updateMyRoutine);
-      setName("");
-      setGoal("");
+    if (result.error) {
+      setError(result);
+      setCount("");
+      setDuration("");
     } else {
       setEditForm(false);
       setError(null);
-      setThisRoutine({
-        ...routine,
-        name: updateMyRoutine.name,
-        goal: updateMyRoutine.goal,
+      setThisActivity({
+        ...thisActivity,
+        count: result.count,
+        duration: result.duration,
       });
-      return updateMyRoutine;
+      return result;
     }
   };
 
-  const nameChange = (event) => {
-    setName(event.target.value);
+  const countChange = (event) => {
+    setCount(event.target.value);
   };
 
-  const goalChange = (event) => {
-    setGoal(event.target.value);
+  const durationChange = (event) => {
+    setDuration(event.target.value);
   };
 
-  const editFormFunc = (routine) => {
+  const editFormFunc = (thisActivity) => {
     return (
       <form onSubmit={handleEdit}>
         <input
           type="text"
-          name="name"
-          defaultValue={routine.name}
+          name="count"
+          defaultValue={thisActivity.count}
           required={true}
-          onChange={nameChange}
+          onChange={countChange}
         />
         <input
           type="text"
-          name="goal"
-          defaultValue={routine.goal}
+          name="duration"
+          defaultValue={thisActivity.duration}
           required={true}
-          onChange={goalChange}
+          onChange={durationChange}
         />
         <button type="submit">UPDATE</button>
       </form>
@@ -81,7 +87,7 @@ const EditRoutine = ({ routineId, routine, setThisRoutine }) => {
             setEditForm(true);
           }}
         >
-          Edit Routine
+          Edit Activity
         </button>
       </div>
     );
@@ -90,10 +96,10 @@ const EditRoutine = ({ routineId, routine, setThisRoutine }) => {
   return (
     <div>
       {editForm ? cancelEdit() : regEdit()}
-      {editForm ? editFormFunc(routine) : null}
+      {editForm ? editFormFunc(thisActivity) : null}
       {error && error.message ? `Routine name aleady exists!` : null}
     </div>
   );
 };
 
-export default EditRoutine;
+export default EditActivity;

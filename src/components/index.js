@@ -8,3 +8,8 @@ export { default as My_Routines } from "./My_Routines";
 export { default as Header } from "./Header";
 export { default as DeleteRoutine } from "./DeleteRoutine";
 export { default as EditRoutine } from "./EditRoutine";
+export { default as DropDown } from "./DropDown";
+export { default as SingleRoutine } from "./SingleRoutine";
+export { default as SingleActivity } from "./SingleActivity";
+export { default as EditActivity } from "./EditActivity";
+export { default as RemoveActivity } from "./RemoveActivity";

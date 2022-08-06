@@ -5,7 +5,6 @@ const Activities = () => {
   const [allActivities, setAllActivities] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchActivities() {
@@ -21,12 +20,11 @@ const Activities = () => {
     const myActivity = await newActivity(token, name, description);
 
     if (myActivity.error) {
-      setError(myActivity);
+      alert("Activity already exists!");
       setName("");
       setDescription("");
     } else {
-      setAllActivities([myActivity, ...allActivities])
-      setError(null);
+      setAllActivities([myActivity, ...allActivities]);
       setName("");
       setDescription("");
     }
@@ -43,28 +41,28 @@ const Activities = () => {
   return (
     <div>
       <h1>Activities</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name*"
-          required={true}
-          onChange={nameChange}
-          value={name}
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="Description*"
-          required={true}
-          onChange={descriptionChange}
-          value={description}
-        />
-        <button type="submit">ADD ACTIVITY</button>
-      </form>
-      {error && error.message ? <h3>{error.message}</h3> : null}
+      {localStorage.getItem("loggedIn") ? (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name*"
+            required={true}
+            onChange={nameChange}
+            value={name}
+          />
+          <input
+            type="text"
+            name="description"
+            placeholder="Description*"
+            required={true}
+            onChange={descriptionChange}
+            value={description}
+          />
+          <button type="submit">ADD ACTIVITY</button>
+        </form>
+      ) : null}
       <div>
-        {" "}
         {allActivities.length
           ? allActivities.map((activity, index) => {
               return (

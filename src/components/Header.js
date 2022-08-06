@@ -12,7 +12,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
 
     return (
         <div>
-            <h1 onClick={() => { navigate("/"); }}>Fitness Trackr</h1>
+            <h1 onClick={() => { navigate("/"); }}>Fitness Trac.kr</h1>
             {localStorage.getItem("loggedIn") ? (
                 <>
                     <div onClick={() => { navigate("/routines"); }}>Routines</div>
