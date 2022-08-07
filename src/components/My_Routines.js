@@ -54,6 +54,7 @@ const My_Routines = () => {
 
   return (
     <div>
+      <h1 className="text-center"> My Routines </h1>
       <div className="routineFormContainer">
       <h6 className="text-center">Add New Routine</h6>
       <form className="text-center" onSubmit={handleSubmit}>
@@ -79,7 +80,7 @@ const My_Routines = () => {
       </form>
       </div>
       {error && error.message ? `Routine name aleady exists!` : null}
-      <h1 className="text-center"> My Routines </h1>
+      
       <div className="routinesContainer">
         {userRoutines.length
           ? userRoutines.map((routine, index) => {
