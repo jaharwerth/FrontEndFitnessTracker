@@ -1,3 +1,6 @@
+// Strange error that occurs at seemingly random intervals. If page appears broken, refresh until it shows up. Need to do a help ticket to figure out why that happens.
+// DropDown.js:15 Uncaught TypeError: Cannot read properties of undefined (reading 'id')
+
 import React, { useState, useEffect } from "react";
 import { newRoutine, getUserRoutines, getActivities } from "../api";
 import { SingleRoutine } from "./";
@@ -51,9 +54,11 @@ const My_Routines = () => {
 
   return (
     <div>
-      <h1>Add New Routine</h1>
-      <form onSubmit={handleSubmit}>
+      <div className="routineFormContainer">
+      <h6 className="text-center">Add New Routine</h6>
+      <form className="text-center" onSubmit={handleSubmit}>
         <input
+          className="routineNameInput"
           type="text"
           name="name"
           placeholder="Name*"
@@ -62,6 +67,7 @@ const My_Routines = () => {
           value={name}
         />
         <input
+          className="routineGoalInput"
           type="text"
           name="goal"
           placeholder="Goal*"
@@ -69,11 +75,12 @@ const My_Routines = () => {
           onChange={goalChange}
           value={goal}
         />
-        <button type="submit">CREATE</button>
+        <button className="btn btn-outline-primary btn-sm" type="submit">CREATE</button>
       </form>
+      </div>
       {error && error.message ? `Routine name aleady exists!` : null}
-      <h1> My Routines </h1>
-      <div>
+      <h1 className="text-center"> My Routines </h1>
+      <div className="routinesContainer">
         {userRoutines.length
           ? userRoutines.map((routine, index) => {
               return (

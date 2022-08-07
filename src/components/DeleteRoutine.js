@@ -17,7 +17,7 @@ const DeleteRoutine = ({ routineId, setThisRoutine }) => {
 
   return (
     <div>
-      <button onClick={handleDelete}>Delete Routine</button>
+      <button className="btn btn-dark btn-sm" onClick={handleDelete}>Delete Routine</button>
     </div>
   );
 };

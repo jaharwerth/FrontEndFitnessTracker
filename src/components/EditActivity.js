@@ -59,7 +59,7 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
           required={true}
           onChange={durationChange}
         />
-        <button type="submit">UPDATE</button>
+        <button className="btn btn-outline-primary btn-sm" type="submit">UPDATE</button>
       </form>
     );
   };
@@ -67,7 +67,7 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
   const cancelEdit = () => {
     return (
       <div>
-        <button
+        <button className="btn btn-danger btn-sm"
           onClick={() => {
             setEditForm(false);
             setError("");
@@ -82,7 +82,7 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
   const regEdit = () => {
     return (
       <div>
-        <button
+        <button className="btn btn-outline-success btn-sm"
           onClick={() => {
             setEditForm(true);
           }}

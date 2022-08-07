@@ -40,10 +40,15 @@ const Activities = () => {
 
   return (
     <div>
-      <h1>Activities</h1>
+      <h1 className="text-center">Activities</h1>
+
+
       {localStorage.getItem("loggedIn") ? (
-        <form onSubmit={handleSubmit}>
+        <div className="activitiesFormContainer">
+          <h6 className="text-center">Add New Activity</h6>
+        <form className="text-center" onSubmit={handleSubmit}>
           <input
+            className="activitiesNameInput"
             type="text"
             name="name"
             placeholder="Name*"
@@ -52,6 +57,7 @@ const Activities = () => {
             value={name}
           />
           <input
+            className="activitiesDescriptionInput"
             type="text"
             name="description"
             placeholder="Description*"
@@ -59,25 +65,38 @@ const Activities = () => {
             onChange={descriptionChange}
             value={description}
           />
-          <button type="submit">ADD ACTIVITY</button>
+          <button type="submit" className="btn btn-outline-primary btn-sm">ADD ACTIVITY</button>
         </form>
+        </div>
       ) : null}
-      <div>
+
+
+      <div className="allActivitiesContainer">
+
         {allActivities.length
           ? allActivities.map((activity, index) => {
               return (
-                <div className="redBox" key={index}>
-                  <div>
-                    <b>{activity.name}</b>
+                <div key={index}>
+                  <div className="card activitiesCard">
+                    <div className="card-body">
+                    <h5 className="card-title text-center">{activity.name}</h5>
+
+                    <p className="card-text">Description: {activity.description}</p> 
                   </div>
-                  <div>
-                    <b>Description</b> {activity.description}
-                  </div>
+                </div>
                 </div>
               );
             })
-          : null}
+          : <div>
+              <div className="card-body">
+                <h5 className="card-title">No activities to display</h5>
+
+              </div>
+            </div>}
+
       </div>
+
+
     </div>
   );
 };
