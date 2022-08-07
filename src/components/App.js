@@ -9,7 +9,7 @@ const App = () => {
         <div>
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home setLoggedIn={setLoggedIn}/>} />
                 <Route path="/Register" element={<Register />} />
                 <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} />} />
                 <Route path="/Activities" element={<Activities />} />

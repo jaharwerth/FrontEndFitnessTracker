@@ -42,8 +42,8 @@ const DropDown = ({
         <b>Activities:</b>
       </div>
       <form onSubmit={handleSubmit}>
-        <select name="activities" onChange={handleChange}>
-          <option>Choose Activity to Attach</option>
+        <select className="dropdown" name="activities" onChange={handleChange}>
+          <option>Choose Activity</option>
           {allActivities.map((activity, index) => {
             return (
               <option key={`activity${index}`} value={`${activity.id},${activity.name},${activity.description}`}>
@@ -52,7 +52,7 @@ const DropDown = ({
             );
           })}
         </select>
-        <button type="submit">Add Activity</button>
+        <button className="btn btn-outline-primary btn-sm" type="submit">Add Activity</button>
       </form>
     </div>
   );

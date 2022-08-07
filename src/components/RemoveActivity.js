@@ -19,7 +19,7 @@ const RemoveActivity = ({thisActivity, setThisActivity}) => {
 
   return (
     <div>
-      <button onClick={handleDelete}>Remove Activity</button>
+      <button className="btn btn-dark btn-sm" onClick={handleDelete}>Remove Activity</button>
     </div>
   );
 };

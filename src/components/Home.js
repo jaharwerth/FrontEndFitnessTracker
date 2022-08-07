@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getProfile } from "../api";
 import { Login } from "./"
 
-const Home = () => {
+const Home = ({setLoggedIn}) => {
     const navigate = useNavigate();
     const [myInfo, setMyInfo] = useState({});
   
@@ -19,10 +19,9 @@ const Home = () => {
     return (
         <div>
           {localStorage.getItem("loggedIn") ? (
-            <>
-              <h1>Welcome to Fitness Trac.kr</h1>
+            <div className="text-center">
               {myInfo && myInfo.username ? (
-                <h3>{`Logged in as ${myInfo.username}`}</h3>
+              <h1 className="text-center">{`Welcome to Fitness Trac.kr ${myInfo.username}`}</h1>
               ) : null}
               <button
                 onClick={() => {
@@ -31,11 +30,11 @@ const Home = () => {
               >
                 VIEW YOUR ROUTINES
               </button>
-            </>
+            </div>
           ) : (
             <>
-              <h1>Welcome to Fitness Trac.kr</h1>
-              <Login />              
+              <h1 className="text-center">Welcome to Fitness Trac.kr</h1>
+              <Login setLoggedIn={setLoggedIn}/>              
             </>
           )}
         </div>

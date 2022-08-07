@@ -3,19 +3,21 @@ import { DeleteRoutine, EditRoutine, DropDown, SingleActivity } from "./";
 
 const SingleRoutine = ({ routine, allActivities, setAllActivities }) => {
   const [thisRoutine, setThisRoutine] = useState(routine);
+  
 
   return (
     <>
       {thisRoutine ? (
-        <div>
-          <div className="redBox">
-            <h3>{thisRoutine.name}</h3>
-            <div>
+        <div className="card routinesCard">
+          <div className="card-body">
+            <h5 className="card-title text-center">{thisRoutine.name}</h5>
+            <div className="card-text">
               <b>User:</b> {thisRoutine.creatorName}
             </div>
             <div>
               <b>Goal: </b> {thisRoutine.goal}
             </div>
+            <div className="editDeleteButtons">
             <EditRoutine
               routineId={thisRoutine.id}
               routine={thisRoutine}
@@ -25,6 +27,7 @@ const SingleRoutine = ({ routine, allActivities, setAllActivities }) => {
               routineId={thisRoutine.id}
               setThisRoutine={setThisRoutine}
             />
+            </div>
             <DropDown
               routineId={thisRoutine.id}
               thisRoutine={thisRoutine}
@@ -32,16 +35,23 @@ const SingleRoutine = ({ routine, allActivities, setAllActivities }) => {
               allActivities={allActivities}
               setAllActivities={setAllActivities}
             />
+            <div className="activitiesContainer">
             {thisRoutine.activities && thisRoutine.activities.length
               ? thisRoutine.activities.map((activity, index) => {
-                  return (
-                    <SingleActivity
-                      key={`routine${index}`}
-                      activity={activity}
-                    />
-                  );
-                })
-              : null}
+                return (
+                  <SingleActivity
+                    key={`routine${index}`}
+                    activity={activity}
+                  />
+                );
+              })
+              : <div>
+              <div className="card-body">
+                <h5 className="card-title">No activities to display</h5>
+
+              </div>
+            </div>}
+              </div>
           </div>
         </div>
       ) : null}
