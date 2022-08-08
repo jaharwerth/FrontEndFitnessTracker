@@ -1,4 +1,4 @@
-const BASEURL = "http://fitnesstrac-kr.herokuapp.com/api";
+const BASEURL = "https://fitnesstrac-kr.herokuapp.com/api";
 
 export async function registerPerson(event) {
   const registerUsername = event.target[0].value;
