@@ -53,7 +53,9 @@ const EditRoutine = ({ routineId, routine, setThisRoutine }) => {
           required={true}
           onChange={goalChange}
         />
-        <button className="btn btn-outline-primary btn-sm" type="submit">UPDATE</button>
+        <button className="btn btn-outline-primary btn-sm" type="submit">
+          UPDATE
+        </button>
       </form>
     );
   };
@@ -61,7 +63,8 @@ const EditRoutine = ({ routineId, routine, setThisRoutine }) => {
   const cancelEdit = () => {
     return (
       <div>
-        <button className="btn btn-danger btn-sm"
+        <button
+          className="btn btn-danger btn-sm"
           onClick={() => {
             setEditForm(false);
             setError("");
@@ -76,7 +79,8 @@ const EditRoutine = ({ routineId, routine, setThisRoutine }) => {
   const regEdit = () => {
     return (
       <div>
-        <button className="btn btn-outline-success btn-sm"
+        <button
+          className="btn btn-outline-success btn-sm"
           onClick={() => {
             setEditForm(true);
           }}

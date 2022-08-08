@@ -1,5 +1,8 @@
-// Strange error that occurs at seemingly random intervals. If page appears broken, refresh until it shows up. Need to do a help ticket to figure out why that happens.
-// DropDown.js:15 Uncaught TypeError: Cannot read properties of undefined (reading 'id')
+// Strange error occurs at seemingly random intervals. If page appears broken, please refresh until the page renders (might need to be more than once). Will need a help ticket to figure out why this happens. (DropDown.js:15 Uncaught TypeError: Cannot read properties of undefined (reading 'id'))
+
+// When you create a new routine (and at least one other routine has already been created), it repopulates the previous routine made. But if you refresh the page, the problem is fixed.
+
+// If you try to edit activity right after it has been added, you will received the following error, "invalid input syntax for type integer: \"undefined\"". But if you refresh the page and then try to edit activity, you can update duration and count with no issue.
 
 import React, { useState, useEffect } from "react";
 import { newRoutine, getUserRoutines, getActivities } from "../api";
@@ -56,36 +59,42 @@ const My_Routines = () => {
     <div>
       <h1 className="text-center"> My Routines </h1>
       <div className="routineFormContainer">
-      <h6 className="text-center">Add New Routine</h6>
-      <form className="text-center" onSubmit={handleSubmit}>
-        <input
-          className="routineNameInput"
-          type="text"
-          name="name"
-          placeholder="Name*"
-          required={true}
-          onChange={nameChange}
-          value={name}
-        />
-        <input
-          className="routineGoalInput"
-          type="text"
-          name="goal"
-          placeholder="Goal*"
-          required={true}
-          onChange={goalChange}
-          value={goal}
-        />
-        <button className="btn btn-outline-primary btn-sm" type="submit">CREATE</button>
-      </form>
+        <h6 className="text-center">Add New Routine</h6>
+        <form className="text-center" onSubmit={handleSubmit}>
+          <input
+            className="routineNameInput"
+            type="text"
+            name="name"
+            placeholder="Name*"
+            required={true}
+            onChange={nameChange}
+            value={name}
+          />
+          <input
+            className="routineGoalInput"
+            type="text"
+            name="goal"
+            placeholder="Goal*"
+            required={true}
+            onChange={goalChange}
+            value={goal}
+          />
+          <button className="btn btn-outline-primary btn-sm" type="submit">
+            CREATE
+          </button>
+        </form>
       </div>
       {error && error.message ? `Routine name aleady exists!` : null}
-      
+
       <div className="routinesContainer">
         {userRoutines.length
           ? userRoutines.map((routine, index) => {
               return (
-                <SingleRoutine key={`routine${index}`} routine={routine} allActivities={allActivities} setAllActivities={setAllActivities} />
+                <SingleRoutine
+                  key={`routine${index}`}
+                  routine={routine}
+                  allActivities={allActivities}
+                />
               );
             })
           : null}

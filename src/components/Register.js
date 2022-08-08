@@ -20,7 +20,7 @@ const Register = () => {
       setRegUsername("");
       setRegPassword("");
       setConfirmPassword("");
-      alert("Registration successful please Login");
+      alert("Registration successful! Please login");
       navigate("/Login");
     }
   };
@@ -44,57 +44,65 @@ const Register = () => {
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div className="card bg-dark text-white">
               <div className="card-body p-5 text-center">
-
                 <div className="mb-md-5 mt-md-4 pb-5">
-
                   <h2 className="fw-bold mb-2 text-uppercase">Register User</h2>
-                  <p className="text-white-50 mb-5">Please enter a username and password</p>
+                  <p className="text-white-50 mb-5">
+                    Please enter a username and password
+                  </p>
                   <form onSubmit={handleSubmit}>
                     <div className="form-outline form-white mb-4">
                       <input
                         type="text"
                         name="username"
                         className="form-control form-control-lg"
-                        onChange={userNameChange} 
+                        onChange={userNameChange}
                         required={true}
-                        value={regUsername}/>
+                        value={regUsername}
+                      />
                       <label className="form-label">Username</label>
                     </div>
-
                     <div className="form-outline form-white mb-4">
-                      <input 
-                        type="password" 
-                        id="typePasswordX" 
-                        className="form-control form-control-lg" 
+                      <input
+                        type="password"
+                        id="typePasswordX"
+                        className="form-control form-control-lg"
                         minLength="8"
-                        onChange={passwordChange}
                         required={true}
-                        value={regPassword} />
-                      <label className="form-label" htmlFor="typePasswordX">Password</label>
+                        onChange={passwordChange}
+                        value={regPassword}
+                      />
+                      <label className="form-label" htmlFor="typePasswordX">
+                        Password
+                      </label>
                     </div>
-
                     <div className="form-outline form-white mb-4">
-                      <input 
-                        type="password" 
-                        id="typePasswordX" 
-                        className="form-control form-control-lg" 
+                      <input
+                        type="password"
+                        id="typePasswordX"
+                        className="form-control form-control-lg"
+                        minLength="8"
                         required={true}
                         onChange={confirmPasswordChange}
-                        value={confirmPassword} />
-                      <label className="form-label" htmlFor="typePasswordX">Retype Password</label>
+                        value={confirmPassword}
+                      />
+                      <label className="form-label" htmlFor="typePasswordX">
+                        Retype Password
+                      </label>
                     </div>
-
-                    <button className="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
+                    <button
+                      className="btn btn-outline-light btn-lg px-5"
+                      type="submit"
+                    >
+                      Register
+                    </button>
                   </form>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
   );
 };
 

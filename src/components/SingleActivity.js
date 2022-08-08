@@ -21,8 +21,14 @@ const SingleActivity = ({ activity }) => {
             <b>Count:</b> {thisActivity.count}
           </div>
           <div className="editDeleteButtons">
-          <EditActivity thisActivity={thisActivity} setThisActivity={setThisActivity} />
-          <RemoveActivity thisActivity={thisActivity} setThisActivity={setThisActivity} />
+            <EditActivity
+              thisActivity={thisActivity}
+              setThisActivity={setThisActivity}
+            />
+            <RemoveActivity
+              thisActivity={thisActivity}
+              setThisActivity={setThisActivity}
+            />
           </div>
         </div>
       ) : null}

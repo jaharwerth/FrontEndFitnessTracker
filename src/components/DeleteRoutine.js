@@ -11,13 +11,15 @@ const DeleteRoutine = ({ routineId, setThisRoutine }) => {
       setThisRoutine(null);
       alert("Routine has been Deleted!");
     } else {
-      alert("There was an error deleting your routine");
+      alert("There was an error deleting your routine!");
     }
   };
 
   return (
     <div>
-      <button className="btn btn-dark btn-sm" onClick={handleDelete}>Delete Routine</button>
+      <button className="btn btn-dark btn-sm" onClick={handleDelete}>
+        Delete Routine
+      </button>
     </div>
   );
 };

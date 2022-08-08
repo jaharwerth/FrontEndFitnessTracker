@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getActivities, attachActivity } from "../api";
+import { attachActivity } from "../api";
 
 const DropDown = ({
   routineId,
@@ -10,9 +10,13 @@ const DropDown = ({
   const [selected, setSelected] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(()=>{
-    if(allActivities) {
-      setSelected([allActivities[0].id, allActivities[0].name, allActivities[0].description])
+  useEffect(() => {
+    if (allActivities) {
+      setSelected([
+        allActivities[0].id,
+        allActivities[0].name,
+        allActivities[0].description,
+      ]);
     }
   }, [allActivities]);
 
@@ -22,13 +26,16 @@ const DropDown = ({
 
     if (result.error) {
       setError(result);
-      alert("activity already attached");
+      alert("Activity already attached!");
     } else {
       setError(null);
-      result.name = selected[1]
-      result.description = selected[2]
-      setThisRoutine({...thisRoutine, activities: [...thisRoutine.activities, result]})
-      alert("activity has been added");
+      result.name = selected[1];
+      result.description = selected[2];
+      setThisRoutine({
+        ...thisRoutine,
+        activities: [...thisRoutine.activities, result],
+      });
+      alert("Activity has been added!");
     }
   };
 
@@ -46,13 +53,18 @@ const DropDown = ({
           <option>Choose Activity</option>
           {allActivities.map((activity, index) => {
             return (
-              <option key={`activity${index}`} value={`${activity.id},${activity.name},${activity.description}`}>
+              <option
+                key={`activity${index}`}
+                value={`${activity.id},${activity.name},${activity.description}`}
+              >
                 {activity.name}
               </option>
             );
           })}
         </select>
-        <button className="btn btn-outline-primary btn-sm" type="submit">Add Activity</button>
+        <button className="btn btn-outline-primary btn-sm" type="submit">
+          Add Activity
+        </button>
       </form>
     </div>
   );

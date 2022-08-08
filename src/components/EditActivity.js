@@ -17,7 +17,7 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
       duration,
       count
     );
-
+    
     if (result.error) {
       setError(result);
       setCount("");
@@ -59,7 +59,9 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
           required={true}
           onChange={durationChange}
         />
-        <button className="btn btn-outline-primary btn-sm" type="submit">UPDATE</button>
+        <button className="btn btn-outline-primary btn-sm" type="submit">
+          UPDATE
+        </button>
       </form>
     );
   };
@@ -67,7 +69,8 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
   const cancelEdit = () => {
     return (
       <div>
-        <button className="btn btn-danger btn-sm"
+        <button
+          className="btn btn-danger btn-sm"
           onClick={() => {
             setEditForm(false);
             setError("");
@@ -82,7 +85,8 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
   const regEdit = () => {
     return (
       <div>
-        <button className="btn btn-outline-success btn-sm"
+        <button
+          className="btn btn-outline-success btn-sm"
           onClick={() => {
             setEditForm(true);
           }}
@@ -97,7 +101,7 @@ const EditActivity = ({ thisActivity, setThisActivity }) => {
     <div>
       {editForm ? cancelEdit() : regEdit()}
       {editForm ? editFormFunc(thisActivity) : null}
-      {error && error.message ? `Routine name aleady exists!` : null}
+      {error && error.message ? "Please refresh page and try again." : null}
     </div>
   );
 };

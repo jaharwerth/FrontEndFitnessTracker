@@ -181,7 +181,8 @@ export async function removeActivity(routineActivityId, token) {
 }
 
 export async function editActivity(routineActivityId, token, duration, count) {
-  const response = await fetch(`${BASEURL}/routine_activities/${routineActivityId}`,
+  const response = await fetch(
+    `${BASEURL}/routine_activities/${routineActivityId}`,
     {
       method: "PATCH",
       headers: {

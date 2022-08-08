@@ -41,62 +41,53 @@ const Activities = () => {
   return (
     <div>
       <h1 className="text-center">Activities</h1>
-
-
       {localStorage.getItem("loggedIn") ? (
         <div className="activitiesFormContainer">
           <h6 className="text-center">Add New Activity</h6>
-        <form className="text-center" onSubmit={handleSubmit}>
-          <input
-            className="activitiesNameInput"
-            type="text"
-            name="name"
-            placeholder="Name*"
-            required={true}
-            onChange={nameChange}
-            value={name}
-          />
-          <input
-            className="activitiesDescriptionInput"
-            type="text"
-            name="description"
-            placeholder="Description*"
-            required={true}
-            onChange={descriptionChange}
-            value={description}
-          />
-          <button type="submit" className="btn btn-outline-primary btn-sm">ADD ACTIVITY</button>
-        </form>
+          <form className="text-center" onSubmit={handleSubmit}>
+            <input
+              className="activitiesNameInput"
+              type="text"
+              name="name"
+              placeholder="Name*"
+              required={true}
+              onChange={nameChange}
+              value={name}
+            />
+            <input
+              className="activitiesDescriptionInput"
+              type="text"
+              name="description"
+              placeholder="Description*"
+              required={true}
+              onChange={descriptionChange}
+              value={description}
+            />
+            <button type="submit" className="btn btn-outline-primary btn-sm">
+              ADD ACTIVITY
+            </button>
+          </form>
         </div>
       ) : null}
-
-
       <div className="allActivitiesContainer">
-
-        {allActivities.length
-          ? allActivities.map((activity, index) => {
-              return (
-                <div key={index}>
-                  <div className="card activitiesCard">
-                    <div className="card-body">
+        {allActivities.length ? (
+          allActivities.map((activity, index) => {
+            return (
+              <div key={index}>
+                <div className="card activitiesCard">
+                  <div className="card-body">
                     <h5 className="card-title text-center">{activity.name}</h5>
 
-                    <p className="card-text">Description: {activity.description}</p> 
+                    <p className="card-text">
+                      <b>Description:</b> {activity.description}
+                    </p>
                   </div>
                 </div>
-                </div>
-              );
-            })
-          : <div>
-              <div className="card-body">
-                <h5 className="card-title">No activities to display</h5>
-
               </div>
-            </div>}
-
+            );
+          })
+        ) : null}
       </div>
-
-
     </div>
   );
 };
