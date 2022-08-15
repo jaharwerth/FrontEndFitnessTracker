@@ -38,7 +38,7 @@ const SingleRoutine = ({ routine, allActivities }) => {
                 thisRoutine.activities.map((activity, index) => {
                   return (
                     <SingleActivity
-                      key={`routine${index}`}
+                      key={`routine${activity.id}`}
                       activity={activity}
                     />
                   );

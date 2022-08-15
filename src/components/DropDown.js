@@ -11,7 +11,7 @@ const DropDown = ({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (allActivities) {
+    if (allActivities.length) {
       setSelected([
         allActivities[0].id,
         allActivities[0].name,
@@ -23,6 +23,9 @@ const DropDown = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
     const result = await attachActivity(routineId, selected[0]);
+    result.routineActivityId = result.id
+    result.id = result.activityId 
+    delete result.activityId
 
     if (result.error) {
       setError(result);
@@ -31,9 +34,10 @@ const DropDown = ({
       setError(null);
       result.name = selected[1];
       result.description = selected[2];
+      const oldActivities = thisRoutine.activities ? thisRoutine.activities : [];
       setThisRoutine({
         ...thisRoutine,
-        activities: [...thisRoutine.activities, result],
+        activities: [...oldActivities, result],
       });
       alert("Activity has been added!");
     }

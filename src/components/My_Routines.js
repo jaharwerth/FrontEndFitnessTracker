@@ -1,9 +1,3 @@
-// Strange error occurs at seemingly random intervals. If page appears broken, please refresh until the page renders (might need to be more than once). Will need a help ticket to figure out why this happens. (DropDown.js:15 Uncaught TypeError: Cannot read properties of undefined (reading 'id'))
-
-// When you create a new routine (and at least one other routine has already been created), it repopulates the previous routine made. But if you refresh the page, the problem is fixed.
-
-// If you try to edit activity right after it has been added, you will received the following error, "invalid input syntax for type integer: \"undefined\"". But if you refresh the page and then try to edit activity, you can update duration and count with no issue.
-
 import React, { useState, useEffect } from "react";
 import { newRoutine, getUserRoutines, getActivities } from "../api";
 import { SingleRoutine } from "./";
@@ -40,7 +34,7 @@ const My_Routines = () => {
       setName("");
       setGoal("");
     } else {
-      setUserRoutines([result, ...userRoutines]);
+      setUserRoutines([...userRoutines, result]);
       setName("");
       setGoal("");
       setError(null);
@@ -91,7 +85,7 @@ const My_Routines = () => {
           ? userRoutines.map((routine, index) => {
               return (
                 <SingleRoutine
-                  key={`routine${index}`}
+                  key={`routine${routine.id}`}
                   routine={routine}
                   allActivities={allActivities}
                 />
